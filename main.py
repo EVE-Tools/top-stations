@@ -36,12 +36,12 @@ def update_stats():
         top_stations = defaultdict(list_entry)
 
         # Get All regionIDs
-        region_ids = requests.get(_ESI_REGION_IDS_URL).json()
+        region_ids = requests.get(_ESI_REGION_IDS_URL, timeout=10).json()
 
         # Then get all region's markets and process orders
         for id in region_ids:
-            logging.debug("Getting %d..." % id)
-            order_response = requests.get(_REGION_MARKET_URL_PATTERN.format(region_id=id))
+            logging.info("Getting %d..." % id)
+            order_response = requests.get(_REGION_MARKET_URL_PATTERN.format(region_id=id), timeout=10)
 
             orders = ijson.items(io.BytesIO(order_response.content), 'item')
 
