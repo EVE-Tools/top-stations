@@ -1,0 +1,7 @@
+pipeline:
+  docker:
+    image: plugins/docker
+    repo: evetools/top-stations
+    tag:
+      - latest
+      - ${DRONE_BRANCH}

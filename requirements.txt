@@ -1,0 +1,4 @@
+cffi==1.10.0
+ijson==2.3
+requests==2.13
+schedule==0.4.2

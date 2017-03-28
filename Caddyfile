@@ -1,0 +1,9 @@
+:8000/api/top-stations/ {
+    tls off
+    redir /v1/list/ /api/top-stations/v1/list 302
+    log / stdout "{combined}"
+    root /top_stations/stats
+    ext .json
+    gzip
+    header Content-Type application/json
+}
