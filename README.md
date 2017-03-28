@@ -11,10 +11,14 @@ Either use the prebuilt Docker images, or:
 * Run `pip install -r requirements.txt`
 * Run `python main.py`
 
-Now a server will listen on port `8000` serving stats data once it has been generated.
+Now a server will listen on port `80` unless configured otherwise, serving stats data once they have been generated.
 
 ## Deployment Info
-Builds and releases are handled by Drone. There are no configurable environment variables.
+Builds and releases are handled by Drone.
+
+Environment Variable | Default | Description
+--- | --- | ---
+PORT | 80 | Port the integrated webserver will listen on
 
 ## Endpoints
 
