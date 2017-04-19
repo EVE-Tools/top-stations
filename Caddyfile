@@ -6,4 +6,5 @@
     ext .json
     gzip
     header Content-Type application/json
+    header Cache-Control "max-age=3600"
 }
