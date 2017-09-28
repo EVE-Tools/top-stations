@@ -1,5 +1,4 @@
-FROM alpine:3.5
-MAINTAINER zweizeichen@element-43.com
+FROM alpine:3.6
 
 ENV PORT 80
 EXPOSE 80
