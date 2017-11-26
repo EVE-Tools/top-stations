@@ -61,12 +61,12 @@ def update_stats():
         logging.debug("Saving stats..." )
         toplist = []
         for station_id, stats in top_stations.items():
-            stats['station_id'] = station_id
+            stats['location_id'] = station_id
             toplist.append(stats)
 
         toplist.sort(key=itemgetter('total_orders'), reverse=True)
 
-        with open('stats/v1/list.json', 'w') as json_file:
+        with open('stats/v2/list.json', 'w') as json_file:
             json.dump(toplist, json_file)
 
         logging.info("Done!")
