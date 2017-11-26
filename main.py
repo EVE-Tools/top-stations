@@ -12,7 +12,7 @@ import requests
 import schedule
 
 _ESI_REGION_IDS_URL = "https://esi.tech.ccp.is/v1/universe/regions/"
-_REGION_MARKET_URL_PATTERN = "https://element-43.com/api/orders/v1/region/{region_id}/"
+_REGION_MARKET_URL_PATTERN = "https://element-43.com/api/orders/v2/region/{region_id}/"
 
 def list_entry():
     return {
@@ -46,13 +46,13 @@ def update_stats():
             orders = ijson.items(io.BytesIO(order_response.content), 'item')
 
             for order in orders:
-                stat_entry = top_stations[order['stationID']]
+                stat_entry = top_stations[order['location_id']]
                 stat_entry['total_orders'] += 1
-                order_value = float(order['volRemaining'] * order['price'])
+                order_value = float(order['volume_remain'] * order['price'])
 
                 stat_entry['total_volume'] += order_value
 
-                if order['bid']:
+                if order['is_buy_order']:
                     stat_entry['bid_volume'] += order_value
                 else:
                     stat_entry['ask_volume'] += order_value

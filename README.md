@@ -1,7 +1,7 @@
 # Top Stations
 [![Build Status](https://drone.element-43.com/api/badges/EVE-Tools/top-stations/status.svg)](https://drone.element-43.com/EVE-Tools/top-stations) [![Docker Image](https://images.microbadger.com/badges/image/evetools/top-stations.svg)](https://microbadger.com/images/evetools/top-stations)
 
-This service for [Element43](https://element-43.com) serves a list of top stations by market volume, based on data gathered from the [order-server](https://github.com/EVE-Tools/order-server). As the dataset is very large (multiple hundred megabytes of JSON), a streaming parser is used. Data is collected by a Python script on startup and every 60 minutes from then on. All aggregate data is put into a file which is served by a Caddy server. TLS is not enabled as it is expected to run this service behind a TLS-terminating reverse proxy. It can be enabled by editing the `Caddyfile`.
+This service for [Element43](https://element-43.com) serves a list of top stations by market volume, based on data gathered from E43's API. As the dataset is very large (multiple hundred megabytes of JSON), a streaming parser is used. Data is collected by a Python script on startup and every 60 minutes from then on. All aggregate data is put into a file which is served by a Caddy server. TLS is not enabled as it is expected to run this service behind a TLS-terminating reverse proxy. It can be enabled by editing the `Caddyfile`.
 
 ## Installation
 Either use the prebuilt Docker images, or:
