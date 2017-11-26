@@ -2,6 +2,7 @@ pipeline:
   docker:
     image: plugins/docker
     repo: evetools/top-stations
+    secrets: [ docker_username, docker_password ]
     tag:
       - latest
       - ${DRONE_BRANCH}
