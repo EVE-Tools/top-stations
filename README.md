@@ -21,7 +21,6 @@ Environment Variable | Default | Description
 PORT | 8000 | Port the integrated webserver will listen on
 
 ## Endpoints
-
 URL Pattern | Description
 --- | ---
 `/api/top-stations/v1/list` | Get stats for all stations in New Eden.
