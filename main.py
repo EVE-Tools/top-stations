@@ -12,7 +12,7 @@ import requests
 import schedule
 
 _ESI_REGION_IDS_URL = "https://esi.tech.ccp.is/v1/universe/regions/"
-_REGION_MARKET_URL_PATTERN = "https://element-43.com/api/orders/v2/region/{region_id}/"
+_REGION_MARKET_URL_PATTERN = "https://element-43.com/api/v1/orders/region/{region_id}"
 
 def list_entry():
     return {
@@ -41,18 +41,20 @@ def update_stats():
         # Then get all region's markets and process orders
         for id in region_ids:
             logging.info("Getting %d..." % id)
-            order_response = requests.get(_REGION_MARKET_URL_PATTERN.format(region_id=id), timeout=10)
+            order_response = requests.get(_REGION_MARKET_URL_PATTERN.format(region_id=id), timeout=60)
 
-            orders = ijson.items(io.BytesIO(order_response.content), 'item')
+            orders = ijson.items(io.BytesIO(order_response.content), 'Orders.item')
 
             for order in orders:
-                stat_entry = top_stations[order['location_id']]
+                stat_entry = top_stations[int(order['location_id'])]
                 stat_entry['total_orders'] += 1
-                order_value = float(order['volume_remain'] * order['price'])
+                order_value = float(int(order['volume_remain']) * float(order['price']))
 
                 stat_entry['total_volume'] += order_value
 
-                if order['is_buy_order']:
+                if 'is_buy_order' not in order.keys():
+                    stat_entry['ask_volume'] += order_value
+                elif order['is_buy_order']:
                     stat_entry['bid_volume'] += order_value
                 else:
                     stat_entry['ask_volume'] += order_value
