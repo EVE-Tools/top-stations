@@ -29,6 +29,6 @@ Environment Variable | Default | Description
 CRON | @hourly | Stats refresh interval
 DB_PATH | top-stations.db | DB persistence path
 LOG_LEVEL | info | The service's log level
-ESI_MARKETS_HOST | esi-markets.element43.cluster.local:43000 | Host/port of the esi-markets instance to be used
+ESI_MARKETS_HOST | esi-markets.element43.svc.cluster.local:43000 | Host/port of the esi-markets instance to be used
 PORT | 43000 | Port the gRPC server will listen on
 
