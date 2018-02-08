@@ -1,46 +1,34 @@
 # Top Stations
 [![Build Status](https://drone.element-43.com/api/badges/EVE-Tools/top-stations/status.svg)](https://drone.element-43.com/EVE-Tools/top-stations) [![Docker Image](https://images.microbadger.com/badges/image/evetools/top-stations.svg)](https://microbadger.com/images/evetools/top-stations)
 
-This service for [Element43](https://element-43.com) serves a list of top stations by market volume, based on data gathered from E43's API. As the dataset is very large (multiple hundred megabytes of JSON), a streaming parser is used. Data is collected by a Python script on startup and every 60 minutes from then on. All aggregate data is put into a file which is served by a Caddy server. TLS is not enabled as it is expected to run this service behind a TLS-terminating reverse proxy. It can be enabled by editing the `Caddyfile`.
+This service for [Element43](https://element-43.com) serves a list of top stations by market volume, based on data gathered from [esi-markets](https://github.com/EVE-Tools/esi-markets). The statistics are updated hourly and persisted to disk using BoltDB.
+
+Issues can be filed [here](https://github.com/EVE-Tools/element43). Pull requests can be made in this repo.
+
+## Interface
+The service's gRPC description can be found [here](https://github.com/EVE-Tools/element43/services/topStations/topStations.proto).
 
 ## Installation
-Either use the prebuilt Docker images, or:
+Either use the prebuilt Docker images and pass the appropriate env vars (see below), or:
 
-* Clone this repo
-* Install the Caddy webserver on your system
-* Run `pip install -r requirements.txt`
-* Run `python main.py`
+* Install Go, clone this repo into your gopath
+* Get and run [esi-markets](https://github.com/EVE-Tools/esi-markets) 
+* Set the ESI_MARKETS_HOST environment variable (see below)
+* Run `go get ./...` to fetch the service's dependencies
+* Run `bash generateProto.sh` to generate the necessary gRPC-related code
+* Run `go build` to build the service
+* Run `./top-stations` to start the service
 
-Now a server will listen on port `8000` unless configured otherwise, serving stats data once they have been generated.
+Now a gRPC server will listen on port `43000` unless configured otherwise, serving stats data once it has been generated.
 
 ## Deployment Info
 Builds and releases are handled by Drone.
 
 Environment Variable | Default | Description
 --- | --- | ---
-PORT | 8000 | Port the integrated webserver will listen on
+CRON | @hourly | Stats refresh interval
+DB_PATH | top-stations.db | DB persistence path
+LOG_LEVEL | info | The service's log level
+ESI_MARKETS_HOST | esi-markets.element43.cluster.local:43000 | Host/port of the esi-markets instance to be used
+PORT | 43000 | Port the gRPC server will listen on
 
-## Endpoints
-URL Pattern | Description
---- | ---
-`/api/top-stations/v1/list` | Get stats for all stations in New Eden.
-
-```json
-[
-  {
-      "ask_volume": 149456931151.31012,
-      "station_id": 60012550,
-      "bid_volume": 4816469548.169999,
-      "total_volume": 154273400699.4801,
-      "total_orders": 1636
-  },
-  {
-      "ask_volume": 409047916414.52997,
-      "station_id": 60013012,
-      "bid_volume": 6911425319661.421,
-      "total_volume": 7320473236075.952,
-      "total_orders": 1608
-  },
-  ...
-]
-```
