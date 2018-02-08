@@ -6,7 +6,7 @@ This service for [Element43](https://element-43.com) serves a list of top statio
 Issues can be filed [here](https://github.com/EVE-Tools/element43). Pull requests can be made in this repo.
 
 ## Interface
-The service's gRPC description can be found [here](https://github.com/EVE-Tools/element43/services/topStations/topStations.proto).
+The service's gRPC description can be found [here](https://github.com/EVE-Tools/element43/blob/master/services/topStations/topStations.proto).
 
 ## Installation
 Either use the prebuilt Docker images and pass the appropriate env vars (see below), or:
