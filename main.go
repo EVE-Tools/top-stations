@@ -90,7 +90,7 @@ func loadConfig() {
 	}
 
 	logrus.SetLevel(logLevel)
-	logrus.Debugf("Config: %q", config)
+	logrus.Debugf("Config: %+v", config)
 }
 
 // Init DB and start gRPC endpoint.
