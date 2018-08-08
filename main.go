@@ -148,7 +148,7 @@ func updateTopStations() {
 
 	httpClientESI := &http.Client{
 		Timeout:   timeout,
-		Transport: transport.NewESITransport(userAgent, timeout),
+		Transport: transport.NewESITransport(userAgent, timeout, 500),
 	}
 
 	esiClient := goesi.NewAPIClient(httpClientESI, userAgent)
