@@ -22,7 +22,6 @@ Either use the prebuilt Docker images and pass the appropriate env vars (see bel
 Now a gRPC server will listen on port `43000` unless configured otherwise, serving stats data once it has been generated.
 
 ## Deployment Info
-Builds and releases are handled by Drone.
 
 Environment Variable | Default | Description
 --- | --- | ---
