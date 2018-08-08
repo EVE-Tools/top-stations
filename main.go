@@ -30,7 +30,7 @@ import (
 // Config holds the application's configuration info from the environment.
 type Config struct {
 	Cron           string `default:"@hourly" envconfig:"cron"`
-	DBPath         string `default:"top-stations.db" envconfig:"db_path"`
+	DBPath         string `default:"/data/top-stations.db" envconfig:"db_path"`
 	LogLevel       string `default:"info" envconfig:"log_level"`
 	EsiMarketsHost string `default:"esi-markets.element43.svc.cluster.local:43000" envconfig:"esi_markets_host"`
 	Port           string `default:"43000" envconfig:"port"`
