@@ -1,5 +1,5 @@
 # Top Stations
-[![Build Status](https://drone.element-43.com/api/badges/EVE-Tools/top-stations/status.svg)](https://drone.element-43.com/EVE-Tools/top-stations) [![Docker Image](https://images.microbadger.com/badges/image/evetools/top-stations.svg)](https://microbadger.com/images/evetools/top-stations)
+[![Build Status](https://semaphoreci.com/api/v1/zweizeichen/top-stations/branches/master/badge.svg)](https://semaphoreci.com/zweizeichen/top-stations) [![Docker Image](https://images.microbadger.com/badges/image/evetools/top-stations.svg)](https://microbadger.com/images/evetools/top-stations)
 
 This service for [Element43](https://element-43.com) serves a list of top stations by market volume, based on data gathered from [esi-markets](https://github.com/EVE-Tools/esi-markets). The statistics are updated hourly and persisted to disk using BoltDB.
 
