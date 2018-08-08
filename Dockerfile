@@ -10,7 +10,7 @@ RUN apk update && \
 COPY . /go/src/github.com/EVE-Tools/top-stations
 
 WORKDIR /go/src/github.com/EVE-Tools/top-stations
-RUN go get -v ./...
+RUN go get -d -v ./...
 RUN go build
 RUN cp /go/src/github.com/EVE-Tools/top-stations/top-stations /top-stations
 
